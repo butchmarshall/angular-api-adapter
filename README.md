@@ -10,52 +10,52 @@ Set up a service.
 ```js
 angular
 	.module("myApp", [])
-	.factory('Customer', ['$rootScope', 'angularApi',
-	function($rootScope, angularApi) {
-		angularApi.addRoute(
+	.factory('Customer', ['$rootScope', 'ApiAdapter',
+	function($rootScope, ApiAdapter) {
+		ApiAdapter.addRoute(
 			"get_customers",
 			"/api/customers"
 		);
-		angularApi.addRoute(
+		ApiAdapter.addRoute(
 			"get_customer",
 			"/api/customers/{customerId}"
 		);
-		angularApi.addRoute(
+		ApiAdapter.addRoute(
 			"create_customer",
 			"/api/customers",
 			{
 				"type": "POST",
 				"success": function() {
-					angularApi.clearCache("get_customers");
+					ApiAdapter.clearCache("get_customers");
 				}
 			}
 		);
-		angularApi.addRoute(
+		ApiAdapter.addRoute(
 			"update_customer",
 			"/api/customers/{customerId}",
 			{
 				"type": "PUT",
 				"success": function() {
-					angularApi.clearCache("get_customer");
-					angularApi.clearCache("get_customers");
+					ApiAdapter.clearCache("get_customer");
+					ApiAdapter.clearCache("get_customers");
 				}
 			}
 		);
-		angularApi.addRoute(
+		ApiAdapter.addRoute(
 			"delete_account_customer",
 			"/api/customers/{customerId}",
 			{
 				"type": "DELETE",
 				"success": function() {
-					angularApi.clearCache("get_customer");
-					angularApi.clearCache("get_customers");
+					ApiAdapter.clearCache("get_customer");
+					ApiAdapter.clearCache("get_customers");
 				}
 			}
 		);
 
 		return {
 			get: function(params, args, noCache) {
-				return angularApi.execute(
+				return ApiAdapter.execute(
 					"get_customer",
 					params,
 					args,
@@ -63,7 +63,7 @@ angular
 				);
 			},
 			index: function(params, args, noCache) {
-				return angularApi.execute(
+				return ApiAdapter.execute(
 					"get_customers",
 					params,
 					args,
@@ -71,7 +71,7 @@ angular
 				);
 			},
 			create: function(params, args, noCache) {
-				return angularApi.execute(
+				return ApiAdapter.execute(
 					"create_customer",
 					params,
 					args,
@@ -79,7 +79,7 @@ angular
 				);
 			},
 			update: function(params, args, noCache) {
-				return angularApi.execute(
+				return ApiAdapter.execute(
 					"update_customer",
 					params,
 					args,
@@ -87,7 +87,7 @@ angular
 				);
 			},
 			destroy: function(params, args, noCache) {
-				return angularApi.execute(
+				return ApiAdapter.execute(
 					"delete_customer",
 					params,
 					args,
