@@ -28,6 +28,13 @@ gulp.task('minify', function() {
 					amd: 'jquery',
 					param: 'jQuery',
 					global: 'jQuery'
+				},
+				{
+					name: 'jquery-api-adapter',
+					cjs: 'jquery.api-adapter',
+					amd: 'jquery.api-adapter',
+					param: 'Api',
+					global: 'jQuery.Api'
 				}
 			]
 		},
