@@ -19,6 +19,25 @@ gulp.task('minify', function() {
 		'./src/services/*.js'
 	])
 	.pipe(concat('angular-api-adapter.js'))
+	.pipe(umd({
+		dependencies: function() {
+			return [
+				{
+					name: 'jQuery',
+					cjs: 'jquery',
+					amd: 'jquery',
+					param: 'jQuery',
+					global: 'jQuery'
+				}
+			]
+		},
+		exports: function() {
+			return;
+		},
+		namespace: function() {
+			return 'angularApiAdapter';
+		}
+	}))
 	.pipe(gulp.dest('./dist/'))
 	.pipe(uglify())
 	.pipe(rename('angular-api-adapter.min.js'))
